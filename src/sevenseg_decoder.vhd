@@ -38,7 +38,36 @@ end sevenseg_decoder;
 
 architecture Behavioral of sevenseg_decoder is
 
+   signal w_seg : std_logic_vector (6 downto 0):= (others=> '0');
+ 
 begin
 
+
+with i_hex select
+    w_seg <=  "1111110" when x"0",
+              "0110000" when x"1",
+              "1101101" when x"2",
+              "1111001" when x"3",
+              "0110011" when x"4",
+              "1011011" when x"5",
+              "1011111" when x"6",
+              "1110000" when x"7",
+              "1111111" when x"8",
+              "1110011" when x"9",
+              "1110111" when x"A",
+              "0011111" when x"B",
+              "0001101" when x"C",
+              "0111101" when x"D",
+              "1001111" when x"E",
+              "1000111" when x"F",
+              "0000000" when others;
+      
+o_seg_n(6) <= not w_seg(0);
+o_seg_n(5) <= not w_seg(1);
+o_seg_n(4) <= not w_seg(2);
+o_seg_n(3) <= not w_seg(3);
+o_seg_n(2) <= not w_seg(4);
+o_seg_n(1) <= not w_seg(5);
+o_seg_n(0) <= not w_seg(6);
 
 end Behavioral;
